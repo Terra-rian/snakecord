@@ -42,7 +42,7 @@
         "discord",
         "snake"
     ],
-    "license": "ISC",
+    "license": "MIT",
     "main": "index.js",
     "name": "snakecord",
     "repository": {
@@ -53,5 +53,5 @@
         "test": "node test.js"
     },
     "types": "index.d.ts",
-    "version": "0.0.7"
+    "version": "1.0.1"
 }
