@@ -3,10 +3,9 @@ interface optionType {
     color?: string;
     gameOverTitle?: string;
     timestamp?: boolean;
-  }
+}
   
 export default class SnakeGame {
-    
     gameEmbed: any;
     inGame: boolean;
     score: number;

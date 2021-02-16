@@ -1,6 +1,6 @@
 # Snakecord
 
-Make your create snake game on discord easy
+Create fun and interactive games based on the famous Snake game!
 
 # Installation
 
@@ -9,65 +9,69 @@ npm install snakecord
 ```
 
 # Features
-- Super easy to use 😀
+- Easy to use
+- Clean and focused
+- Actively maintained
 
 
 # Examples
 
 ```js
 const SnakeGame = require('snakecord');
-const Discord = require("discord.js")
-const client = new Discord.Client()
+const Discord = require("discord.js");
+const client = new Discord.Client();
 
 const snakeGame = new SnakeGame({
     title: 'Snake Game',
     color: "GREEN",
     timestamp: false,
     gameOverTitle: "Game Over"
-})
+});
 
 const config = {
     token: "TOKEN",
     prefix: "t!"
 }
+
 client.on('ready', () => {
-    console.log("Clear Console")
-    console.clear()
+    console.log("Clearing Console");
+    console.clear();
     console.log('Ready!');
-    client.user.setActivity(`${config.prefix}help`)
+    client.user.setActivity(`${config.prefix}help`);
 });
 
 client.on('message', message => {
-	if (!message.content.startsWith(config.prefix) || message.author.bot) return;
+	if(!message.content.startsWith(config.prefix) || message.author.bot) return;
 
 	const args = message.content.slice(config.prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
 
-	if (command === 'test') {
-		message.channel.send('Test command work.');
-	} else if (command === 'snake' || command === 'snakegame') {
-		snakeGame.newGame(message);
-	} else if (command === 'help' || command === 'h') {
+	if(command === 'test') {
+		return message.channel.send('Test command works.');
+	} else if(command === 'snake' || command === 'snakegame') {
+		return snakeGame.newGame(message);
+	} else if(command === 'help' || command === 'h') {
         const embed = new Discord.MessageEmbed()
-        .setTitle("Help Menu")
-        .addFields(
-            { name: 'test', value: "Check the command handler", inline: true },
-            { name: 'snake', value: "Play snake game", inline: true },
-            { name: 'help', value: "Show this list", inline: true }
-        )
+            .setTitle("Help Menu")
+            .addFields(
+                { name: 'test', value: "Check the command handler", inline: true },
+                { name: 'snake', value: "Play snake game", inline: true },
+                { name: 'help', value: "Show this list", inline: true }
+            );
 
-        message.reply(embed)
+        return message.reply(embed);
     }
 });
 
-client.login(config.token)
+client.login(config.token);
 ```
 
-# Picture
+# Pictures
 ![1](/images/1.PNG)
 
 ![2](/images/2.PNG)
 
 # Authors
-* **[1GPEX](https://github.com/1GPEX)** - *Original Idea*
-* **[Science Spot](https://github.com/Scientific-Guy)** - *Make a options* 
+* **[Terrarian](https://github.com/Terra-rian/snakecord)** - *Current maintainer*
+* **[1GPEX](https://github.com/1GPEX)** - *Original idea*
+* **[Science Spot](https://github.com/Scientific-Guy)** - *Making the options* 

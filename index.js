@@ -5,15 +5,15 @@ const gameBoard = [];
 const apple = { x: 1, y: 1 };
 
 class SnakeGame {
-    constructor(options={}) {
+    constructor(options = {}) {
         this.snake = [{ x: 5, y: 5 }];
         this.snakeLength = 1;
         this.score = 0;
         this.gameEmbed = null;
         this.inGame = false;
         this.options = options;
-        for (let y = 0; y < HEIGHT; y++) {
-            for (let x = 0; x < WIDTH; x++) {
+        for(let y = 0; y < HEIGHT; y++) {
+            for(let x = 0; x < WIDTH; x++) {
                 gameBoard[y * WIDTH + x] = "🟦";
             }
         }
@@ -21,23 +21,24 @@ class SnakeGame {
 
     gameBoardToString() {
         let str = ""
-        for (let y = 0; y < HEIGHT; y++) {
-            for (let x = 0; x < WIDTH; x++) {
-                if (x == apple.x && y == apple.y) {
+        for(let y = 0; y < HEIGHT; y++) {
+            for(let x = 0; x < WIDTH; x++) {
+                if(x == apple.x && y == apple.y) {
                     str += "🍎";
                     continue;
                 }
 
                 let flag = true;
-                for (let s = 0; s < this.snake.length; s++) {
-                    if (x == this.snake[s].x && y == this.snake[s].y) {
+                for(let s = 0; s < this.snake.length; s++) {
+                    if(x == this.snake[s].x && y == this.snake[s].y) {
                         str += "🟩";
                         flag = false;
                     }
                 }
 
-                if (flag)
+                if(flag) {
                     str += gameBoard[y * WIDTH + x];
+                }
             }
             str += "\n";
         }
@@ -52,15 +53,14 @@ class SnakeGame {
         let newApplePos = { x: 0, y: 0 };
         do {
             newApplePos = { x: parseInt(Math.random() * WIDTH), y: parseInt(Math.random() * HEIGHT) };
-        } while (this.isLocInSnake(newApplePos))
+        } while(this.isLocInSnake(newApplePos))
 
         apple.x = newApplePos.x;
         apple.y = newApplePos.y;
     }
 
     newGame(msg) {
-        if (this.inGame)
-            return;
+        if(this.inGame) return;
 
         this.inGame = true;
         this.score = 0;
@@ -72,7 +72,7 @@ class SnakeGame {
             .setTitle(this.options.title || 'Snake Game')
             .setDescription(this.gameBoardToString())
 
-            if(this.options.timestamp) embed.setTimestamp();
+        if(this.options.timestamp) embed.setTimestamp();
 
         msg.channel.send(embed).then(emsg => {
             this.gameEmbed = emsg;
@@ -86,7 +86,7 @@ class SnakeGame {
     }
 
     step() {
-        if (apple.x == this.snake[0].x && apple.y == this.snake[0].y) {
+        if(apple.x == this.snake[0].x && apple.y == this.snake[0].y) {
             this.score += 1;
             this.snakeLength++;
             this.newAppleLoc();
@@ -97,7 +97,7 @@ class SnakeGame {
             .setTitle(this.options.title || 'Snake Game')
             .setDescription(this.gameBoardToString())
 
-            if(this.options.timestamp) editEmbed.setTimestamp();
+        if(this.options.timestamp) editEmbed.setTimestamp();
 
         this.gameEmbed.edit(editEmbed);
 
@@ -111,7 +111,7 @@ class SnakeGame {
             .setTitle(this.options.gameOverTitle || 'Game Over')
             .setDescription("SCORE: " + this.score)
 
-            if(this.options.timestamp) editEmbed.setTimestamp();
+        if(this.options.timestamp) editEmbed.setTimestamp();
         this.gameEmbed.edit(editEmbed);
 
         this.gameEmbed.reactions.removeAll()
@@ -128,39 +128,40 @@ class SnakeGame {
 
                 const snakeHead = this.snake[0];
                 const nextPos = { x: snakeHead.x, y: snakeHead.y };
-                if (reaction.emoji.name === '⬅️') {
+                if(reaction.emoji.name === '⬅️') {
                     let nextX = snakeHead.x - 1;
-                    if (nextX < 0)
+                    if(nextX < 0) {
                         nextX = WIDTH - 1;
+                    }
                     nextPos.x = nextX;
-                }
-                else if (reaction.emoji.name === '⬆️') {
+                } else if(reaction.emoji.name === '⬆️') {
                     let nextY = snakeHead.y - 1;
-                    if (nextY < 0)
+                    if(nextY < 0) {
                         nextY = HEIGHT - 1;
+                    }
                     nextPos.y = nextY;
-                }
-                else if (reaction.emoji.name === '⬇️') {
+                } else if(reaction.emoji.name === '⬇️') {
                     let nextY = snakeHead.y + 1;
-                    if (nextY >= HEIGHT)
+                    if(nextY >= HEIGHT) {
                         nextY = 0;
+                    }
                     nextPos.y = nextY;
-                }
-                else if (reaction.emoji.name === '➡️') {
+                } else if(reaction.emoji.name === '➡️') {
                     let nextX = snakeHead.x + 1;
-                    if (nextX >= WIDTH)
+                    if(nextX >= WIDTH) {
                         nextX = 0;
+                    }
                     nextPos.x = nextX;
                 }
 
                 reaction.users.remove(reaction.users.cache.filter(user => user.id !== this.gameEmbed.author.id).first().id).then(() => {
-                    if (this.isLocInSnake(nextPos)) {
+                    if(this.isLocInSnake(nextPos)) {
                         this.gameOver();
-                    }
-                    else {
+                    } else {
                         this.snake.unshift(nextPos);
-                        if (this.snake.length > this.snakeLength)
+                        if(this.snake.length > this.snakeLength) {
                             this.snake.pop();
+                        }
 
                         this.step();
                     }
@@ -171,24 +172,24 @@ class SnakeGame {
             });
     }
 
-    setTitle(title){
-        this.options.title = title || 'Hangman'
-        return this
+    setTitle(title) {
+        this.options.title = title || 'Hangman';
+        return this;
     }
     
-    setColor(color){
-        this.options.color = color || 'RANDOM'
-        return this
+    setColor(color) {
+        this.options.color = color || 'RANDOM';
+        return this;
     }
     
-    setTimestamp(){
-        this.options.timestamp = true
-        return this
+    setTimestamp() {
+        this.options.timestamp = true;
+        return this;
     }
     
-    setGameOverTitle(){
-        this.options.gameOverTitle = title || 'Game Over'
-        return this
+    setGameOverTitle() {
+        this.options.gameOverTitle = title || 'Game Over';
+        return this;
     } 
 }
 
