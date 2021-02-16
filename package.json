@@ -36,7 +36,7 @@
     },
     "deprecated": false,
     "description": "Create fun and interactive Snake games on Discord",
-    "homepage": "https://github.com/Terra-rian/snakecord/",
+    "homepage": "https://github.com/Terra-rian/snakecord",
     "keywords": [
         "npm",
         "discord",
