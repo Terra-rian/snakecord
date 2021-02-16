@@ -1,6 +1,6 @@
 {
-    "_from": "@terra-rian/snakecord",
-    "_id": "@terra-rian/snakecord@0.0.6",
+    "_from": "snakecord",
+    "_id": "snakecord@latest",
     "_inBundle": false,
     "_integrity": "sha512-yx2g65CMypEh3iA9g/qQ+dejoF65gBb6e7iIdfc+DfYL4rSpMrgGMQE9H/whadH2TwD6QHE+73dkVTxd7pQPhA==",
     "_location": "/@terra-rian/snakecord",
@@ -8,10 +8,10 @@
     "_requested": {
         "type": "tag",
         "registry": true,
-        "raw": "@terra-rian/snakecord",
-        "name": "@terra-rian/snakecord",
-        "escapedName": "@terra-rian%2fsnakecord",
-        "scope": "@terra-rian",
+        "raw": "snakecord",
+        "name": "snakecord",
+        "escapedName": "snakecord",
+        "scope": "",
         "rawSpec": "",
         "saveSpec": null,
         "fetchSpec": "latest"
