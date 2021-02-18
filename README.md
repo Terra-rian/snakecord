@@ -51,13 +51,13 @@ client.on('message', message => {
 	} else if(command === 'snake' || command === 'snakegame') {
 		return snakeGame.newGame(message);
 	} else if(command === 'help' || command === 'h') {
-        const embed = new Discord.MessageEmbed()
-            .setTitle("Help Menu")
-            .addFields(
-                { name: 'test', value: "Check the command handler", inline: true },
-                { name: 'snake', value: "Play snake game", inline: true },
-                { name: 'help', value: "Show this list", inline: true }
-            );
+		const embed = new Discord.MessageEmbed()
+		    .setTitle("Help Menu")
+		    .addFields(
+			{ name: 'test', value: "Check the command handler", inline: true },
+			{ name: 'snake', value: "Play snake game", inline: true },
+			{ name: 'help', value: "Show this list", inline: true }
+		    );
 
         return message.reply(embed);
     }
