@@ -1,10 +1,4 @@
 {
-    "_from": "snakecord",
-    "_id": "snakecord@latest",
-    "_inBundle": false,
-    "_integrity": "sha512-yx2g65CMypEh3iA9g/qQ+dejoF65gBb6e7iIdfc+DfYL4rSpMrgGMQE9H/whadH2TwD6QHE+73dkVTxd7pQPhA==",
-    "_location": "/snakecord",
-    "_phantomChildren": {},
     "_requested": {
         "type": "tag",
         "registry": true,
@@ -20,8 +14,6 @@
         "#USER",
         "/"
     ],
-    "_shasum": "789c6f71cf02c000963c4eabc7c6c0602046f590",
-    "_spec": "snakecord",
     "author": {
         "name": "Terrarian"
     },
