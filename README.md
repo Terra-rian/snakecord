@@ -54,9 +54,9 @@ client.on('message', message => {
 		const embed = new Discord.MessageEmbed()
 		    .setTitle("Help Menu")
 		    .addFields(
-			{ name: 'test', value: "Check the command handler", inline: true },
-			{ name: 'snake', value: "Play snake game", inline: true },
-			{ name: 'help', value: "Show this list", inline: true }
+			    { name: 'test', value: "Check the command handler", inline: true },
+			    { name: 'snake', value: "Play snake game", inline: true },
+			    { name: 'help', value: "Show this list", inline: true }
 		    );
 
         return message.reply(embed);
