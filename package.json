@@ -1,26 +1,11 @@
 {
-    "_requested": {
-        "type": "tag",
-        "registry": true,
-        "raw": "snakecord",
-        "name": "snakecord",
-        "escapedName": "snakecord",
-        "scope": "",
-        "rawSpec": "",
-        "saveSpec": null,
-        "fetchSpec": "latest"
-    },
-    "_requiredBy": [
-        "#USER",
-        "/"
-    ],
     "author": {
         "name": "Terrarian"
     },
     "bugs": {
         "url": "https://github.com/Terra-rian/snakecord/issues"
     },
-    "bundleDependencies": false,
+    "bundleDependencies": [],
     "dependencies": {
         "discord.js": "^12.4.1"
     },
@@ -43,5 +28,5 @@
         "test": "node test.js"
     },
     "types": "index.d.ts",
-    "version": "1.0.5"
+    "version": "1.0.6"
 }
