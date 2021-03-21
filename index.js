@@ -74,7 +74,7 @@ class SnakeGame {
 
         if(this.options.timestamp) embed.setTimestamp();
 
-        msg.channel.send(embed).then(emsg => {
+        msg.channel.send({ embed }).then(emsg => {
             this.gameEmbed = emsg;
             this.gameEmbed.react('⬅️');
             this.gameEmbed.react('⬆️');
