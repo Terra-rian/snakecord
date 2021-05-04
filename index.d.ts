@@ -1,3 +1,5 @@
+import { MessageEmbed, Message, User } from 'discord.js';
+
 interface optionType {
     title?: string;
     color?: string;
@@ -6,7 +8,7 @@ interface optionType {
 }
   
 export default class SnakeGame {
-    gameEmbed: any;
+    gameEmbed: MessageEmbed;
     inGame: boolean;
     score: number;
     snake: any;
@@ -18,10 +20,10 @@ export default class SnakeGame {
     public gameBoardToString(): string;
     public isLocInSnake(pos: any): any;
     public newAppleLoc(): void;
-    public newGame(msg: string): void;
+    public newGame(msg: Message): void;
     public step(): void;
     public gameOver(): void;
-    public filter(reaction: any, user: any): boolean;
+    public filter(reaction: any, user: User): boolean;
     public waitForReaction(): void;
     
     public setTitle(title: string): any;

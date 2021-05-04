@@ -1,21 +1,20 @@
 # Snakecord
 
-Create fun and interactive games based on the famous Snake game!
+You've heard of the famous Snake game, right? Well, this npm/yarn package allows you to create your own CUSTOM Snake games, directly inside Discord via Discord bots!
 
-# Installation
+## Installation
 
 ```bash
 npm install snakecord
+yarn add snakecord
 ```
 
-# Features
+## Features
 - Easy to use
 - Clean and focused
 - Actively maintained
 
-
-# Examples
-
+## Example
 ```js
 const SnakeGame = require('snakecord');
 const Discord = require("discord.js");
@@ -34,44 +33,53 @@ const config = {
 }
 
 client.on('ready', () => {
-    console.log("Clearing Console");
-    console.clear();
     console.log('Ready!');
     client.user.setActivity(`${config.prefix}help`);
 });
 
 client.on('message', message => {
-	if(!message.content.startsWith(config.prefix) || message.author.bot) return;
+    if(!message.content.startsWith(config.prefix) || message.author.bot) return;
 
-	const args = message.content.slice(config.prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
+    const args = message.content.slice(config.prefix.length).trim().split(/ +/);
+    const command = args.shift().toLowerCase();
 
-	if(command === 'test') {
-		return message.channel.send('Test command works.');
-	} else if(command === 'snake' || command === 'snakegame') {
-		return snakeGame.newGame(message);
-	} else if(command === 'help' || command === 'h') {
-		const embed = new Discord.MessageEmbed()
-		    .setTitle("Help Menu")
-		    .addFields(
-			    { name: 'test', value: "Check the command handler", inline: true },
-			    { name: 'snake', value: "Play snake game", inline: true },
-			    { name: 'help', value: "Show this list", inline: true }
-		    );
+    if(command === 'test') {
+        return message.channel.send('Test command works.');
+    } else if(command === 'snake' || command === 'snakegame') {
+        return snakeGame.newGame(message);
+    } else if(command === 'help' || command === 'h') {
+        const embed = new Discord.MessageEmbed()
+            .setTitle("Help Menu")
+            .addFields(
+                { name: 'test', value: "Check the command handler", inline: true },
+                { name: 'snake', value: "Play the snake game", inline: true },
+                { name: 'help', value: "Show this list", inline: true }
+            )
+            .setColor('RANDOM')
+            .setTimestamp();
 
-        return message.reply(embed);
+        return message.channel.send(embed);
     }
 });
 
 client.login(config.token);
 ```
 
-# Pictures
+## In Action
 ![1](/images/1.PNG)
 
 ![2](/images/2.PNG)
 
-# Authors
+## To-Do
+- Optimizations and more optimizations
+- Rewrite the whole thing in TypeScript
+- Add JSDocs for easier development
+- Add more features (including but not limited to)
+    - Board size customizations
+    - Server highscore tracking/leaderboards
+    - Color customizations
+
+## Authors
 * **[Terrarian](https://github.com/Terra-rian/snakecord)** - *Current maintainer*
 * **[1GPEX](https://github.com/1GPEX)** - *Original idea*
 * **[Science Spot](https://github.com/Scientific-Guy)** - *Making the options* 
