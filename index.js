@@ -132,7 +132,7 @@ class SnakeGame {
         const editEmbed = new Discord.MessageEmbed()
             .setColor(this.options.color || 'RANDOM')
             .setTitle(this.options.gameOverTitle || 'Game Over')
-            .setDescription('SCORE: ' + this.score);
+            .setDescription(`SCORE: **${this.score}**`);
 
         if(this.options.timestamp) {
             editEmbed.setTimestamp();
