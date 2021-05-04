@@ -5,12 +5,13 @@
     "bugs": {
         "url": "https://github.com/Terra-rian/snakecord/issues"
     },
-    "bundleDependencies": [],
+    "bundledDependencies": [],
     "dependencies": {
-        "discord.js": "^12.4.1"
+        "discord.js": "^12.4.1",
+        "eslint": "^7.25.0"
     },
     "deprecated": false,
-    "description": "Create fun and interactive Snake games on Discord",
+    "description": "Create fun and interactive games with Discord bots",
     "homepage": "https://github.com/Terra-rian/snakecord",
     "keywords": [
         "npm",
