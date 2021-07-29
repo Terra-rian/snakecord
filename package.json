@@ -1,33 +1,30 @@
 {
+    "name": "snakecord",
+    "description": "The classic Snake game, inside Discord.",
+    "homepage": "https://github.com/Terra-rian/snakecord",
+    "version": "1.0.7",
+    "license": "ISC",
+    "main": "index.js",
+    "types": "index.d.ts",
     "author": {
         "name": "Terrarian"
     },
-    "bugs": {
-        "url": "https://github.com/Terra-rian/snakecord/issues"
-    },
-    "bundledDependencies": [],
-    "dependencies": {
-        "discord.js": "^12.4.1",
-        "eslint": "^7.25.0"
-    },
-    "deprecated": false,
-    "description": "Create fun and interactive games with Discord bots",
-    "homepage": "https://github.com/Terra-rian/snakecord",
     "keywords": [
-        "npm",
+        "bots",
         "discord",
         "snake"
     ],
-    "license": "ISC",
-    "main": "index.js",
-    "name": "snakecord",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Terra-rian/snakecord.git"
     },
-    "scripts": {
-        "test": "node test.js"
+    "bugs": {
+        "url": "https://github.com/Terra-rian/snakecord/issues"
     },
-    "types": "index.d.ts",
-    "version": "1.0.7"
+    "dependencies": {
+        "discord.js": "^12.5.3"
+    },
+    "devDependencies": {
+        "eslint": "^7.31.0"
+    }
 }
