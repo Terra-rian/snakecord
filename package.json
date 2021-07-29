@@ -4,8 +4,8 @@
     "homepage": "https://github.com/Terra-rian/snakecord",
     "version": "1.0.7",
     "license": "ISC",
-    "main": "index.js",
-    "types": "index.d.ts",
+    "main": "out/index.js",
+    "types": "out/snakecord.d.ts",
     "author": {
         "name": "Terrarian"
     },
@@ -25,17 +25,13 @@
         "discord.js": "^12.5.3"
     },
     "devDependencies": {
+        "@types/node": "^16.4.7",
         "@typescript-eslint/eslint-plugin": "^4.28.5",
         "@typescript-eslint/parser": "^4.28.5",
-        "eslint": "^7.31.0",
-        "eslint-config-prettier": "^8.3.0",
-        "eslint-plugin-prettier": "^3.4.0",
-        "prettier": "^2.3.2",
-        "typescript": "^4.3.5"
+        "eslint": "^7.31.0"
     },
     "scripts": {
         "lint": "eslint . --ext .ts",
-        "lint-and-fix": "eslint . --ext .ts --fix",
-        "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
+        "lint-and-fix": "eslint . --ext .ts --fix"
     }
 }

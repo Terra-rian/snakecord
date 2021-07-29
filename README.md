@@ -2,6 +2,8 @@
 
 You've heard of the famous Snake game, right? Well, this npm/yarn package allows you to create your own CUSTOM Snake games, directly inside Discord via Discord bots!
 
+This package does **NOT** support the `master` branch of Discord.js! Please use the latest version of Discord.js v12 for this package to work correctly!
+
 ## Installation
 
 ```bash
@@ -14,7 +16,8 @@ yarn add snakecord
 - Clean and focused
 - Actively maintained
 
-## Example
+## Examples
+### JavaScript
 ```js
 const SnakeGame = require('snakecord');
 const Discord = require("discord.js");
@@ -38,7 +41,9 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-    if(!message.content.startsWith(config.prefix) || message.author.bot) return;
+    if(!message.content.startsWith(config.prefix) || message.author.bot) {
+        return;
+    }
 
     const args = message.content.slice(config.prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
@@ -75,11 +80,11 @@ client.login(config.token);
 - Rewrite the whole thing in TypeScript
 - Add JSDocs for easier development
 - Add more features (including but not limited to)
-    - Board size customizations
+    - ~~Board size customizations~~ **DONE**
     - Server highscore tracking/leaderboards
     - Color customizations
 
 ## Authors
 * **[Terrarian](https://github.com/Terra-rian/snakecord)** - *Current maintainer*
 * **[1GPEX](https://github.com/1GPEX)** - *Original idea*
-* **[Science Spot](https://github.com/Scientific-Guy)** - *Making the options* 
+* **[Science Spot](https://github.com/Scientific-Guy)** - *Making the options*
