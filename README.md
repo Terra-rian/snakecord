@@ -19,7 +19,7 @@ yarn add snakecord
 ## Examples
 ### JavaScript
 ```js
-const SnakeGame = require('snakecord');
+const { SnakeGame } = require('snakecord');
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
@@ -77,7 +77,7 @@ client.login(config.token);
 
 ## To-Do
 - Optimizations and more optimizations
-- Rewrite the whole thing in TypeScript
+- ~~Rewrite the whole thing in TypeScript~~ **DONE**
 - Add JSDocs for easier development
 - Add more features (including but not limited to)
     - ~~Board size customizations~~ **DONE**
