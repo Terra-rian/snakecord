@@ -14,7 +14,7 @@ export interface snakeGameOptions {
      */
     backgroundEmoji?: EmojiIdentifierResolvable;
     /**
-     * The emoji to use as the snake head / body for the game embed.
+     * The emoji to use as the snake head / body for the game.
      */
     snakeEmoji?: EmojiIdentifierResolvable;
     /**
@@ -70,9 +70,9 @@ export class SnakeGame {
     private gameBoardToString(): string;
     private isLocationInSnake(pos: entityLocation): boolean;
     private newAppleLocation(): void;
-    public newGame(msg: Message): void;
+    private newGame(msg: Message): void;
     private step(): void;
-    private gameOver(): void;
+    public gameOver(): void;
     private filter(reaction: EmojiIdentifierResolvable, user: User): boolean;
     private waitForReaction(): void;
 
