@@ -6,6 +6,11 @@
     "license": "ISC",
     "main": "out/index.js",
     "types": "out/snakecord.d.ts",
+    "files": [
+        "out",
+        "src",
+        "typings"
+    ],
     "author": {
         "name": "Terrarian"
     },
