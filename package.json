@@ -2,7 +2,7 @@
     "name": "snakecord",
     "description": "The classic Snake game, inside Discord.",
     "homepage": "https://github.com/Terra-rian/snakecord",
-    "version": "1.1.0-beta.2",
+    "version": "1.1.0-beta.3",
     "license": "ISC",
     "main": "out/index.js",
     "types": "out/snakecord.d.ts",
