@@ -14,6 +14,10 @@ export interface snakeGameOptions {
      */
     backgroundEmoji?: EmojiIdentifierResolvable;
     /**
+     * The emoji to use as the snake head / body for the game embed.
+     */
+    snakeEmoji?: EmojiIdentifierResolvable;
+    /**
      * The emoji to use as the fruit for the game embed.
      */
     fruitEmoji?: EmojiIdentifierResolvable;
@@ -28,11 +32,11 @@ export interface snakeGameOptions {
     /**
      * How wide the game board should be (5 ~ 20 units).
      */
-    width?: number;
+    boardWidth?: number;
     /**
      * How long the game board should be (5 ~ 20 units).
      */
-    length?: number;
+    boardLength?: number;
 }
 
 export interface entityLocation {

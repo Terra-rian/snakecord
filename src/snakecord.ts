@@ -1,4 +1,4 @@
-import { ColorResolvable, Message, MessageEmbed, MessageReaction, User } from 'discord.js';
+import { ColorResolvable, EmojiIdentifierResolvable, Message, MessageEmbed, MessageReaction, User } from 'discord.js';
 import { snakeGameOptions, entityLocation } from '../typings/types';
 
 /**
@@ -8,7 +8,7 @@ export class SnakeGame {
     // Board properties
     boardWidth: number;
     boardLength: number;
-    gameBoard: string[];
+    gameBoard: EmojiIdentifierResolvable[];
     inGame: boolean;
 
     // Entity properties
@@ -23,8 +23,8 @@ export class SnakeGame {
 
     constructor(options: snakeGameOptions) {
         this.options = options;
-        this.boardWidth = this.options.width || 15;
-        this.boardLength = this.options.length || 15;
+        this.boardWidth = this.options.boardWidth || 15;
+        this.boardLength = this.options.boardLength || 15;
         this.gameBoard = [];
         this.apple = { x: 1, y: 1 };
         this.snake = [{ x: 5, y: 5 }];
@@ -35,7 +35,7 @@ export class SnakeGame {
 
         for (let y = 0; y < this.boardLength; y++) {
             for (let x = 0; x < this.boardWidth; x++) {
-                this.gameBoard[y * this.boardWidth + x] = '🟦';
+                this.gameBoard[y * this.boardWidth + x] = this.options.backgroundEmoji || '🟦';
             }
         }
     }
@@ -48,14 +48,14 @@ export class SnakeGame {
         for (let y = 0; y < this.boardLength; y++) {
             for (let x = 0; x < this.boardWidth; x++) {
                 if (x == this.apple.x && y == this.apple.y) {
-                    str += '🍎';
+                    str += this.options.fruitEmoji || '🍎';
                     continue;
                 }
 
                 let flag = true;
                 for (let s = 0; s < this.snake.length; s++) {
                     if (x == this.snake[s].x && y == this.snake[s].y) {
-                        str += '🟩';
+                        str += this.options.snakeEmoji || '🟩';
                         flag = false;
                     }
                 }
@@ -71,6 +71,10 @@ export class SnakeGame {
         return str;
     }
 
+    /**
+     * Checks if the snake hit itself.
+     * @param pos - The snake's current position.
+     */
     isLocationInSnake(pos: entityLocation): entityLocation {
         return this.snake.find(snakePos => snakePos.x == pos.x && snakePos.y == pos.y);
     }
@@ -153,6 +157,9 @@ export class SnakeGame {
         this.waitForReaction();
     }
 
+    /**
+     * Prints the gameover message, or the default one.
+     */
     gameOver(): void {
         this.inGame = false;
 
