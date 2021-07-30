@@ -20,7 +20,7 @@ yarn add snakecord
 ### JavaScript
 ```js
 const { SnakeGame } = require('snakecord');
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 const client = new Discord.Client();
 
 const snakeGame = new SnakeGame({
@@ -81,7 +81,7 @@ client.login(config.token);
 - ~~Rewrite the whole thing in TypeScript~~ **DONE**
 - Add JSDocs for easier development
 - Add more features (including but not limited to)
-    - ~~Board size customizations~~ **DONE**
+    - Board size customizations
     - Server highscore tracking/leaderboards
     - Color customizations
 
