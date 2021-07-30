@@ -4,6 +4,19 @@ You've heard of the famous Snake game, right? Well, this npm/yarn package allows
 
 This package does **NOT** support the `master` branch of Discord.js! Please use the latest version of Discord.js **v12** for this package to work correctly!
 
+## Looking for Collaborators
+
+I'm currently in a position where I cannot focus on this project entirely, which means that updates and improvements might be lacking. Therefore, if there are any people (1 - 3, no need for a large team) who wish to cooperate on this module, please contact on Discord (**`Terrarian#5646`**).
+
+#### You'll need to have (at least) the following skills/experience with:
+- Familiarity with JavaScript
+- Familiarity with TypeScript
+- Able to use Node.js and NPM
+- Knowledge of Git and source control
+- Know how to deploy/configure/use modules
+
+Using VSCode as your coding platform would be preferable, but is not necessary.
+
 ## Installation
 
 ```bash
