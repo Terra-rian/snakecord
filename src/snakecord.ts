@@ -23,8 +23,8 @@ export class SnakeGame {
 
     constructor(options: snakeGameOptions) {
         this.options = options;
-        this.boardWidth = this.options.boardWidth || 15;
-        this.boardLength = this.options.boardLength || 15;
+        this.boardWidth = /* this.options.boardWidth || */ 15;
+        this.boardLength = /* this.options.boardLength || */ 10;
         this.gameBoard = [];
         this.apple = { x: 1, y: 1 };
         this.snake = [{ x: 5, y: 5 }];

@@ -32,11 +32,11 @@ export interface snakeGameOptions {
     /**
      * How wide the game board should be (5 ~ 20 units).
      */
-    boardWidth?: number;
+    // boardWidth?: number;
     /**
      * How long the game board should be (5 ~ 20 units).
      */
-    boardLength?: number;
+    // boardLength?: number;
 }
 
 export interface entityLocation {
