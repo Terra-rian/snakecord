@@ -48,7 +48,7 @@ export class SnakeGame {
         for (let y = 0; y < this.boardLength; y++) {
             for (let x = 0; x < this.boardWidth; x++) {
                 if (x == this.apple.x && y == this.apple.y) {
-                    str += /* this.options.fruitEmoji || */ '🍎';
+                    str += this.options.fruitEmoji || '🍎';
                     continue;
                 }
 
