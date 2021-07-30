@@ -64,8 +64,8 @@ export class SnakeGame {
 
     // Methods
     public gameBoardToString(): string;
-    public isLocInSnake(pos: entityLocation): boolean;
-    public newAppleLoc(): void;
+    public isLocationInSnake(pos: entityLocation): boolean;
+    public newAppleLocation(): void;
     public newGame(msg: Message): void;
     public step(): void;
     public gameOver(): void;

@@ -9,6 +9,7 @@ export class SnakeGame {
     boardWidth: number;
     boardLength: number;
     gameBoard: string[];
+    inGame: boolean;
 
     // Entity properties
     apple: entityLocation;
@@ -18,7 +19,6 @@ export class SnakeGame {
 
     // Other properties
     gameEmbed: Message;
-    inGame: boolean;
     options: snakeGameOptions;
 
     constructor(options: snakeGameOptions) {
@@ -79,7 +79,7 @@ export class SnakeGame {
      * Moves the apple around the game board.
      */
     newAppleLocation(): void {
-        let newApplePos = {
+        let newApplePos: entityLocation = {
             x: 0,
             y: 0,
         };
@@ -185,7 +185,7 @@ export class SnakeGame {
         this.gameEmbed.awaitReactions((reaction, user) => this.filter(reaction, user), { max: 1, time: 60000, errors: ['time'] }).then(collected => {
             const reaction = collected.first();
             const snakeHead = this.snake[0];
-            const nextPos = {
+            const nextPos: entityLocation = {
                 x: snakeHead.x,
                 y: snakeHead.y,
             };

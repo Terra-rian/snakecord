@@ -2,6 +2,17 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es2019",
+        "moduleResolution": "node",
+        "removeComments": false,
+        "alwaysStrict": true,
+        "lib": [
+            "esnext",
+            "esnext.array",
+            "esnext.asynciterable",
+            "esnext.intl",
+            "esnext.symbol"
+        ],
+        "sourceMap": false,
         "declaration": true,
         "outDir": "./out"
     },

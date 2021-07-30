@@ -2,7 +2,7 @@
 
 You've heard of the famous Snake game, right? Well, this npm/yarn package allows you to create your own CUSTOM Snake games, directly inside Discord via Discord bots!
 
-This package does **NOT** support the `master` branch of Discord.js! Please use the latest version of Discord.js v12 for this package to work correctly!
+This package does **NOT** support the `master` branch of Discord.js! Please use the latest version of Discord.js **v12** for this package to work correctly!
 
 ## Installation
 
@@ -77,6 +77,7 @@ client.login(config.token);
 
 ## To-Do
 - Optimizations and more optimizations
+- Add some sort of changelog
 - ~~Rewrite the whole thing in TypeScript~~ **DONE**
 - Add JSDocs for easier development
 - Add more features (including but not limited to)
