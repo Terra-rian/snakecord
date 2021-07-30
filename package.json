@@ -38,5 +38,8 @@
     "scripts": {
         "lint": "eslint . --ext .ts",
         "lint-and-fix": "eslint . --ext .ts --fix"
+    },
+    "engines": {
+        "node": ">=12"
     }
 }
