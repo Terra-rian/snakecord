@@ -52,33 +52,33 @@ export interface entityLocation {
 
 export class SnakeGame {
     // Properties
-    public boardWidth: number;
-    public boardLength: number;
-    public gameBoard: string[];
-    public apple: entityLocation;
-    public snake: entityLocation[];
-    public snakeLength: number;
-    public score: number;
-    public gameEmbed: Message;
-    public inGame: boolean;
-    public options: snakeGameOptions;
+    private boardWidth: number;
+    private boardLength: number;
+    private gameBoard: string[];
+    private apple: entityLocation;
+    private snake: entityLocation[];
+    private snakeLength: number;
+    private score: number;
+    private gameEmbed: Message;
+    private inGame: boolean;
+    private options: snakeGameOptions;
 
     // Constructor
     public constructor(options: snakeGameOptions);
 
     // Methods
-    public gameBoardToString(): string;
-    public isLocationInSnake(pos: entityLocation): boolean;
-    public newAppleLocation(): void;
+    private gameBoardToString(): string;
+    private isLocationInSnake(pos: entityLocation): boolean;
+    private newAppleLocation(): void;
     public newGame(msg: Message): void;
-    public step(): void;
-    public gameOver(): void;
-    public filter(reaction: EmojiIdentifierResolvable, user: User): boolean;
-    public waitForReaction(): void;
+    private step(): void;
+    private gameOver(): void;
+    private filter(reaction: EmojiIdentifierResolvable, user: User): boolean;
+    private waitForReaction(): void;
 
     // Setters
-    public setTitle(title: string): this;
-    public setGameOverTitle(title: string): this;
-    public setColor(color: ColorResolvable): this;
-    public setTimestamp(): this;
+    private setTitle(title: string): this;
+    private setGameOverTitle(title: string): this;
+    private setColor(color: ColorResolvable): this;
+    private setTimestamp(): this;
 }
