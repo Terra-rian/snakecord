@@ -27,7 +27,7 @@
         "url": "https://github.com/Terra-rian/snakecord/issues"
     },
     "dependencies": {
-        "discord.js": "^12.5.3"
+        "discord.js": "^13.0.0"
     },
     "devDependencies": {
         "@types/node": "^16.4.7",
@@ -40,6 +40,6 @@
         "lint-and-fix": "eslint . --ext .ts --fix"
     },
     "engines": {
-        "node": ">=12"
+        "node": ">=14"
     }
 }
