@@ -1,5 +1,5 @@
 import { ColorResolvable, EmojiIdentifierResolvable, Message, MessageEmbed, MessageReaction, User } from 'discord.js';
-import { snakeGameOptions, entityLocation } from '../typings/types';
+import { SnakeGameOptions, EntityLocation } from '../typings/types';
 
 /**
  * The main class, initializes a new Snake game.
@@ -12,16 +12,16 @@ export class SnakeGame {
     inGame: boolean;
 
     // Entity properties
-    apple: entityLocation;
-    snake: entityLocation[];
+    apple: EntityLocation;
+    snake: EntityLocation[];
     snakeLength: number;
     score: number;
 
     // Other properties
     gameEmbed: Message;
-    options: snakeGameOptions;
+    options: SnakeGameOptions;
 
-    constructor(options: snakeGameOptions) {
+    constructor(options: SnakeGameOptions = {}) {
         this.options = options;
         this.boardWidth = /* this.options.boardWidth || */ 15;
         this.boardLength = /* this.options.boardLength || */ 10;
@@ -75,7 +75,7 @@ export class SnakeGame {
      * Checks if the snake hit itself.
      * @param pos - The snake's current position.
      */
-    isLocationInSnake(pos: entityLocation): entityLocation {
+    isLocationInSnake(pos: EntityLocation): EntityLocation {
         return this.snake.find(snakePos => snakePos.x == pos.x && snakePos.y == pos.y);
     }
 
@@ -83,7 +83,7 @@ export class SnakeGame {
      * Moves the apple around the game board.
      */
     newAppleLocation(): void {
-        let newApplePos: entityLocation = {
+        let newApplePos: EntityLocation = {
             x: 0,
             y: 0,
         };
@@ -100,7 +100,7 @@ export class SnakeGame {
     }
 
     /**
-     * Creates a new Snake game
+     * Creates a new Snake game.
      * @param {Message} msg - The message instance from which to begin.
      */
     newGame(msg: Message): void {
@@ -123,7 +123,7 @@ export class SnakeGame {
             embed.setTimestamp();
         }
 
-        msg.channel.send({ embed }).then(message => {
+        msg.channel.send({ embeds: [embed] }).then(message => {
             this.gameEmbed = message;
             this.gameEmbed.react('⬅️');
             this.gameEmbed.react('⬆️');
@@ -153,7 +153,7 @@ export class SnakeGame {
             editedEmbed.setTimestamp();
         }
 
-        this.gameEmbed.edit(editedEmbed);
+        this.gameEmbed.edit({ embeds: [editedEmbed] });
         this.waitForReaction();
     }
 
@@ -172,7 +172,7 @@ export class SnakeGame {
             editedEmbed.setTimestamp();
         }
 
-        this.gameEmbed.edit(editedEmbed);
+        this.gameEmbed.edit({ embeds: [editedEmbed] });
         this.gameEmbed.reactions.removeAll();
     }
 
@@ -189,10 +189,10 @@ export class SnakeGame {
      * Handles reactions on the game embed.
      */
     waitForReaction(): void {
-        this.gameEmbed.awaitReactions((reaction, user) => this.filter(reaction, user), { max: 1, time: 60000, errors: ['time'] }).then(collected => {
+        this.gameEmbed.awaitReactions({ filter: this.filter, max: 1, time: 60000, errors: ['time'] }).then(collected => {
             const reaction = collected.first();
             const snakeHead = this.snake[0];
-            const nextPos: entityLocation = {
+            const nextPos: EntityLocation = {
                 x: snakeHead.x,
                 y: snakeHead.y,
             };

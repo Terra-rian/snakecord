@@ -1,6 +1,6 @@
 import { Message, User, ColorResolvable, EmojiIdentifierResolvable } from 'discord.js';
 
-export interface snakeGameOptions {
+export interface SnakeGameOptions {
     /**
      * The title to display on the game embed.
      */
@@ -39,7 +39,7 @@ export interface snakeGameOptions {
     // boardLength?: number;
 }
 
-export interface entityLocation {
+export interface EntityLocation {
     /**
      * The `X` coordinate of the entity.
      */
@@ -52,33 +52,33 @@ export interface entityLocation {
 
 export class SnakeGame {
     // Properties
-    private boardWidth: number;
-    private boardLength: number;
-    private gameBoard: string[];
-    private apple: entityLocation;
-    private snake: entityLocation[];
-    private snakeLength: number;
-    private score: number;
-    private gameEmbed: Message;
-    private inGame: boolean;
-    private options: snakeGameOptions;
+    boardWidth: number;
+    boardLength: number;
+    gameBoard: string[];
+    apple: EntityLocation;
+    snake: EntityLocation[];
+    snakeLength: number;
+    score: number;
+    gameEmbed: Message;
+    inGame: boolean;
+    options: SnakeGameOptions;
 
     // Constructor
-    public constructor(options: snakeGameOptions);
+    constructor(options?: SnakeGameOptions);
 
     // Methods
-    private gameBoardToString(): string;
-    private isLocationInSnake(pos: entityLocation): boolean;
-    private newAppleLocation(): void;
-    private newGame(msg: Message): void;
-    private step(): void;
-    public gameOver(): void;
-    private filter(reaction: EmojiIdentifierResolvable, user: User): boolean;
-    private waitForReaction(): void;
+    gameBoardToString(): string;
+    isLocationInSnake(pos: EntityLocation): boolean;
+    newAppleLocation(): void;
+    newGame(msg: Message): void;
+    step(): void;
+    gameOver(): void;
+    filter(reaction: EmojiIdentifierResolvable, user: User): boolean;
+    waitForReaction(): void;
 
     // Setters
-    private setTitle(title: string): this;
-    private setGameOverTitle(title: string): this;
-    private setColor(color: ColorResolvable): this;
-    private setTimestamp(): this;
+    setTitle(title: string): this;
+    setGameOverTitle(title: string): this;
+    setColor(color: ColorResolvable): this;
+    setTimestamp(): this;
 }
