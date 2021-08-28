@@ -27,7 +27,7 @@
         "test": "echo No test script available. && exit 1"
     },
     "types": "./index.d.ts",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "devDependencies": {
         "eslint": "^7.32.0"
     },
