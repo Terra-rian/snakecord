@@ -12,7 +12,7 @@ class SnakeGame {
         this.snake = [{ x: 5, y: 5 }];
         this.snakeLength = 1;
         this.score = 0;
-        this.gameEmbed = null;
+        this.gameEmbedMessage = null;
         this.inGame = false;
         this.options = options;
         for(let y = 0; y < HEIGHT; y++) {
@@ -24,7 +24,6 @@ class SnakeGame {
 
     /**
      * Creates a new game board for a Snake game.
-     * @returns A matrix of blue squares and one apple in a random location
      */
     gameBoardToString() {
         let str = '';
@@ -52,18 +51,18 @@ class SnakeGame {
         return str;
     }
 
-    isLocInSnake(pos) {
+    isLocationInSnake(pos) {
         return this.snake.find(sPos => sPos.x == pos.x && sPos.y == pos.y);
     }
 
     /**
      * Moves the apple around the game board.
      */
-    newAppleLoc() {
+    newAppleLocation() {
         let newApplePos = { x: 0, y: 0 };
         do {
             newApplePos = { x: parseInt(Math.random() * WIDTH), y: parseInt(Math.random() * HEIGHT) };
-        } while(this.isLocInSnake(newApplePos));
+        } while(this.isLocationInSnake(newApplePos));
 
         apple.x = newApplePos.x;
         apple.y = newApplePos.y;
@@ -71,9 +70,9 @@ class SnakeGame {
 
     /**
      * Creates a new Snake game
-     * @param {Discord.Message} msg
+     * @param {Discord.Message} msg - The message instance.
      */
-    newGame(msg) {
+    async newGame(msg) {
         if(this.inGame) {
             return;
         }
@@ -82,23 +81,22 @@ class SnakeGame {
         this.score = 0;
         this.snakeLength = 1;
         this.snake = [{ x: 5, y: 5 }];
-        this.newAppleLoc();
+        this.newAppleLocation();
         const embed = new Discord.MessageEmbed()
             .setColor(this.options.color || 'RANDOM')
-            .setTitle(this.options.title || 'Snake Game')
+            .setTitle(this.options.title || 'Snake: The Game')
             .setDescription(this.gameBoardToString());
 
         if(this.options.timestamp) {
             embed.setTimestamp();
         }
 
-        // sending the embed as a message option to prevent edge case errors
-        msg.channel.send({ embed }).then(message => {
-            this.gameEmbed = message;
-            this.gameEmbed.react('⬅️');
-            this.gameEmbed.react('⬆️');
-            this.gameEmbed.react('⬇️');
-            this.gameEmbed.react('➡️');
+        msg.channel.send({ embeds: [embed] }).then(async (message) => {
+            this.gameEmbedMessage = message;
+            await this.gameEmbedMessage.react('⬅️');
+            await this.gameEmbedMessage.react('⬆️');
+            await this.gameEmbedMessage.react('⬇️');
+            await this.gameEmbedMessage.react('➡️');
 
             this.waitForReaction();
         });
@@ -111,7 +109,7 @@ class SnakeGame {
         if(apple.x == this.snake[0].x && apple.y == this.snake[0].y) {
             this.score += 1;
             this.snakeLength++;
-            this.newAppleLoc();
+            this.newAppleLocation();
         }
 
         const editEmbed = new Discord.MessageEmbed()
@@ -123,7 +121,7 @@ class SnakeGame {
             editEmbed.setTimestamp();
         }
 
-        this.gameEmbed.edit(editEmbed);
+        this.gameEmbedMessage.edit({ embeds: [editEmbed] });
         this.waitForReaction();
     }
 
@@ -138,24 +136,17 @@ class SnakeGame {
             editEmbed.setTimestamp();
         }
 
-        this.gameEmbed.edit(editEmbed);
-        this.gameEmbed.reactions.removeAll();
-    }
-
-    /**
-     * The message reaction collector filter.
-     * @param {*} reaction
-     * @param {Discord.User} user
-     */
-    filter(reaction, user) {
-        return ['⬅️', '⬆️', '⬇️', '➡️'].includes(reaction.emoji.name) && user.id !== this.gameEmbed.author.id;
+        this.gameEmbedMessage.edit({ embeds: [editEmbed] });
+        this.gameEmbedMessage.reactions.removeAll();
     }
 
     /**
      * Handles reactions on the game embed.
      */
     waitForReaction() {
-        this.gameEmbed.awaitReactions((reaction, user) => this.filter(reaction, user), { max: 1, time: 60000, errors: ['time'] }).then(collected => {
+        this.gameEmbedMessage.awaitReactions({ filter: (reaction, user) => {
+            return ['⬅️', '⬆️', '⬇️', '➡️'].includes(reaction.emoji.name) && user.id !== this.gameEmbedMessage.author.id;
+        }, max: 1, time: 60000, errors: ['time'] }).then(collected => {
             const reaction = collected.first();
 
             const snakeHead = this.snake[0];
@@ -186,8 +177,8 @@ class SnakeGame {
                 nextPos.x = nextX;
             }
 
-            reaction.users.remove(reaction.users.cache.filter(user => user.id !== this.gameEmbed.author.id).first().id).then(() => {
-                if(this.isLocInSnake(nextPos)) {
+            reaction.users.remove(reaction.users.cache.filter(user => user.id !== this.gameEmbedMessage.author.id).first().id).then(() => {
+                if(this.isLocationInSnake(nextPos)) {
                     this.gameOver();
                 } else {
                     this.snake.unshift(nextPos);
@@ -214,7 +205,7 @@ class SnakeGame {
 
     /**
      * Sets the custom (or default) color of the game embed.
-     * @param {*} color
+     * @param {Discord.ColorResolvable} color
      */
     setColor(color) {
         this.options.color = color || 'RANDOM';

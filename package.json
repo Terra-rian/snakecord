@@ -5,13 +5,11 @@
     "bugs": {
         "url": "https://github.com/Terra-rian/snakecord/issues"
     },
-    "bundledDependencies": [],
     "dependencies": {
-        "discord.js": "^12.4.1",
-        "eslint": "^7.25.0"
+        "discord.js": "^13.1.0"
     },
     "deprecated": false,
-    "description": "Create fun and interactive games with Discord bots",
+    "description": "Create fun and interactive games with Discord bots.",
     "homepage": "https://github.com/Terra-rian/snakecord",
     "keywords": [
         "npm",
@@ -19,15 +17,21 @@
         "snake"
     ],
     "license": "ISC",
-    "main": "index.js",
+    "main": "./index.js",
     "name": "snakecord",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Terra-rian/snakecord.git"
     },
     "scripts": {
-        "test": "node test.js"
+        "test": "echo No test script available. && exit 1"
     },
-    "types": "index.d.ts",
-    "version": "1.0.7"
+    "types": "./index.d.ts",
+    "version": "1.0.8",
+    "devDependencies": {
+        "eslint": "^7.32.0"
+    },
+    "engines": {
+        "node": ">=16"
+    }
 }
