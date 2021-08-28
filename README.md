@@ -38,8 +38,10 @@ client.on('ready', () => {
     client.user.setActivity(`${config.prefix}help`);
 });
 
-client.on('message', message => {
-    if(!message.content.startsWith(config.prefix) || message.author.bot) return;
+client.on('message', async message => {
+    if(!message.content.startsWith(config.prefix) || message.author.bot) {
+        return;
+    }
 
     const args = message.content.slice(config.prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
@@ -47,7 +49,7 @@ client.on('message', message => {
     if(command === 'test') {
         return message.channel.send('Test command works.');
     } else if(command === 'snake' || command === 'snakegame') {
-        return snakeGame.newGame(message);
+        return await snakeGame.newGame(message);
     } else if(command === 'help' || command === 'h') {
         const embed = new Discord.MessageEmbed()
             .setTitle('Help Menu')
@@ -83,4 +85,4 @@ client.login(config.token);
 ## Authors
 * **[Terrarian](https://github.com/Terra-rian/snakecord)** - *Current maintainer*
 * **[1GPEX](https://github.com/1GPEX)** - *Original idea*
-* **[Science Spot](https://github.com/Scientific-Guy)** - *Making the options* 
+* **[Science Spot](https://github.com/Scientific-Guy)** - *Making the options*
