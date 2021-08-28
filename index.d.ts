@@ -1,4 +1,4 @@
-import { Message, User, ColorResolvable, EmojiIdentifierResolvable } from 'discord.js';
+import { Message, ColorResolvable } from 'discord.js';
 
 export interface SnakeGameOptions {
     /**
@@ -59,7 +59,7 @@ export class SnakeGame {
     snake: EntityLocation[];
     snakeLength: number;
     score: number;
-    gameEmbed: Message;
+    gameEmbedMessage: Message;
     inGame: boolean;
     options: SnakeGameOptions;
 
@@ -73,7 +73,6 @@ export class SnakeGame {
     newGame(msg: Message): void;
     step(): void;
     gameOver(): void;
-    filter(reaction: EmojiIdentifierResolvable, user: User): boolean;
     waitForReaction(): void;
 
     // Setters

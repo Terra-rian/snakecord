@@ -12,7 +12,7 @@ class SnakeGame {
         this.snake = [{ x: 5, y: 5 }];
         this.snakeLength = 1;
         this.score = 0;
-        this.gameEmbed = null;
+        this.gameEmbedMessage = null;
         this.inGame = false;
         this.options = options;
         for(let y = 0; y < HEIGHT; y++) {
@@ -72,7 +72,7 @@ class SnakeGame {
      * Creates a new Snake game
      * @param {Discord.Message} msg - The message instance.
      */
-    newGame(msg) {
+    async newGame(msg) {
         if(this.inGame) {
             return;
         }
@@ -91,12 +91,12 @@ class SnakeGame {
             embed.setTimestamp();
         }
 
-        msg.channel.send({ embeds: [embed] }).then(message => {
-            this.gameEmbed = message;
-            this.gameEmbed.react('⬅️');
-            this.gameEmbed.react('⬆️');
-            this.gameEmbed.react('⬇️');
-            this.gameEmbed.react('➡️');
+        msg.channel.send({ embeds: [embed] }).then(async (message) => {
+            this.gameEmbedMessage = message;
+            await this.gameEmbedMessage.react('⬅️');
+            await this.gameEmbedMessage.react('⬆️');
+            await this.gameEmbedMessage.react('⬇️');
+            await this.gameEmbedMessage.react('➡️');
 
             this.waitForReaction();
         });
@@ -121,7 +121,7 @@ class SnakeGame {
             editEmbed.setTimestamp();
         }
 
-        this.gameEmbed.edit({ embeds: [editEmbed] });
+        this.gameEmbedMessage.edit({ embeds: [editEmbed] });
         this.waitForReaction();
     }
 
@@ -136,24 +136,17 @@ class SnakeGame {
             editEmbed.setTimestamp();
         }
 
-        this.gameEmbed.edit({ embeds: [editEmbed] });
-        this.gameEmbed.reactions.removeAll();
-    }
-
-    /**
-     * The message reaction collector filter.
-     * @param {Discord.MessageReaction} reaction
-     * @param {Discord.User} user
-     */
-    filter(reaction, user) {
-        return ['⬅️', '⬆️', '⬇️', '➡️'].includes(reaction.emoji.name) && user.id !== this.gameEmbed.author.id;
+        this.gameEmbedMessage.edit({ embeds: [editEmbed] });
+        this.gameEmbedMessage.reactions.removeAll();
     }
 
     /**
      * Handles reactions on the game embed.
      */
     waitForReaction() {
-        this.gameEmbed.awaitReactions({ filter: this.filter, max: 1, time: 60000, errors: ['time'] }).then(collected => {
+        this.gameEmbedMessage.awaitReactions({ filter: (reaction, user) => {
+            return ['⬅️', '⬆️', '⬇️', '➡️'].includes(reaction.emoji.name) && user.id !== this.gameEmbedMessage.author.id;
+        }, max: 1, time: 60000, errors: ['time'] }).then(collected => {
             const reaction = collected.first();
 
             const snakeHead = this.snake[0];
@@ -184,7 +177,7 @@ class SnakeGame {
                 nextPos.x = nextX;
             }
 
-            reaction.users.remove(reaction.users.cache.filter(user => user.id !== this.gameEmbed.author.id).first().id).then(() => {
+            reaction.users.remove(reaction.users.cache.filter(user => user.id !== this.gameEmbedMessage.author.id).first().id).then(() => {
                 if(this.isLocationInSnake(nextPos)) {
                     this.gameOver();
                 } else {
