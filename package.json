@@ -7,8 +7,7 @@
     },
     "bundledDependencies": [],
     "dependencies": {
-        "discord.js": "^12.4.1",
-        "eslint": "^7.25.0"
+        "discord.js": "^13.1.0"
     },
     "deprecated": false,
     "description": "Create fun and interactive games with Discord bots",
@@ -29,5 +28,11 @@
         "test": "node test.js"
     },
     "types": "index.d.ts",
-    "version": "1.0.8"
+    "version": "1.0.8",
+    "devDependencies": {
+        "eslint": "^7.32.0"
+    },
+    "engines": {
+        "node": ">=16"
+    }
 }
