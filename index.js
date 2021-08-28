@@ -24,7 +24,6 @@ class SnakeGame {
 
     /**
      * Creates a new game board for a Snake game.
-     * @returns A matrix of blue squares and one apple in a random location
      */
     gameBoardToString() {
         let str = '';
@@ -71,7 +70,7 @@ class SnakeGame {
 
     /**
      * Creates a new Snake game
-     * @param {Discord.Message} msg
+     * @param {Discord.Message} msg - The message instance.
      */
     newGame(msg) {
         if(this.inGame) {
@@ -92,8 +91,7 @@ class SnakeGame {
             embed.setTimestamp();
         }
 
-        // sending the embed as a message option to prevent edge case errors
-        msg.channel.send({ embed }).then(message => {
+        msg.channel.send({ embeds: [embed] }).then(message => {
             this.gameEmbed = message;
             this.gameEmbed.react('⬅️');
             this.gameEmbed.react('⬆️');
@@ -123,7 +121,7 @@ class SnakeGame {
             editEmbed.setTimestamp();
         }
 
-        this.gameEmbed.edit(editEmbed);
+        this.gameEmbed.edit({ embeds: [editEmbed] });
         this.waitForReaction();
     }
 
@@ -138,13 +136,13 @@ class SnakeGame {
             editEmbed.setTimestamp();
         }
 
-        this.gameEmbed.edit(editEmbed);
+        this.gameEmbed.edit({ embeds: [editEmbed] });
         this.gameEmbed.reactions.removeAll();
     }
 
     /**
      * The message reaction collector filter.
-     * @param {*} reaction
+     * @param {Discord.MessageReaction} reaction
      * @param {Discord.User} user
      */
     filter(reaction, user) {
@@ -155,7 +153,7 @@ class SnakeGame {
      * Handles reactions on the game embed.
      */
     waitForReaction() {
-        this.gameEmbed.awaitReactions((reaction, user) => this.filter(reaction, user), { max: 1, time: 60000, errors: ['time'] }).then(collected => {
+        this.gameEmbed.awaitReactions({ filter: this.filter, max: 1, time: 60000, errors: ['time'] }).then(collected => {
             const reaction = collected.first();
 
             const snakeHead = this.snake[0];
@@ -214,7 +212,7 @@ class SnakeGame {
 
     /**
      * Sets the custom (or default) color of the game embed.
-     * @param {*} color
+     * @param {Discord.ColorResolvable} color
      */
     setColor(color) {
         this.options.color = color || 'RANDOM';
