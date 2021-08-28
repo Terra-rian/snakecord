@@ -51,18 +51,18 @@ class SnakeGame {
         return str;
     }
 
-    isLocInSnake(pos) {
+    isLocationInSnake(pos) {
         return this.snake.find(sPos => sPos.x == pos.x && sPos.y == pos.y);
     }
 
     /**
      * Moves the apple around the game board.
      */
-    newAppleLoc() {
+    newAppleLocation() {
         let newApplePos = { x: 0, y: 0 };
         do {
             newApplePos = { x: parseInt(Math.random() * WIDTH), y: parseInt(Math.random() * HEIGHT) };
-        } while(this.isLocInSnake(newApplePos));
+        } while(this.isLocationInSnake(newApplePos));
 
         apple.x = newApplePos.x;
         apple.y = newApplePos.y;
@@ -81,7 +81,7 @@ class SnakeGame {
         this.score = 0;
         this.snakeLength = 1;
         this.snake = [{ x: 5, y: 5 }];
-        this.newAppleLoc();
+        this.newAppleLocation();
         const embed = new Discord.MessageEmbed()
             .setColor(this.options.color || 'RANDOM')
             .setTitle(this.options.title || 'Snake Game')
@@ -109,7 +109,7 @@ class SnakeGame {
         if(apple.x == this.snake[0].x && apple.y == this.snake[0].y) {
             this.score += 1;
             this.snakeLength++;
-            this.newAppleLoc();
+            this.newAppleLocation();
         }
 
         const editEmbed = new Discord.MessageEmbed()
@@ -185,7 +185,7 @@ class SnakeGame {
             }
 
             reaction.users.remove(reaction.users.cache.filter(user => user.id !== this.gameEmbed.author.id).first().id).then(() => {
-                if(this.isLocInSnake(nextPos)) {
+                if(this.isLocationInSnake(nextPos)) {
                     this.gameOver();
                 } else {
                     this.snake.unshift(nextPos);

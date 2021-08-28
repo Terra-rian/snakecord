@@ -12,15 +12,15 @@ export interface SnakeGameOptions {
     /**
      * The emoji to use as the background for the game embed.
      */
-    backgroundEmoji?: EmojiIdentifierResolvable;
+    // backgroundEmoji?: EmojiIdentifierResolvable;
     /**
      * The emoji to use as the snake head / body for the game.
      */
-    snakeEmoji?: EmojiIdentifierResolvable;
+    // snakeEmoji?: EmojiIdentifierResolvable;
     /**
      * The emoji to use as the fruit for the game embed.
      */
-    fruitEmoji?: EmojiIdentifierResolvable;
+    // fruitEmoji?: EmojiIdentifierResolvable;
     /**
      * Whether or not to display the timestamp on the game embed.
      */
@@ -52,10 +52,10 @@ export interface EntityLocation {
 
 export class SnakeGame {
     // Properties
-    boardWidth: number;
-    boardLength: number;
-    gameBoard: string[];
-    apple: EntityLocation;
+    // boardWidth: number;
+    // boardLength: number;
+    // gameBoard: string[];
+    // apple: EntityLocation;
     snake: EntityLocation[];
     snakeLength: number;
     score: number;
