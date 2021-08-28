@@ -6,6 +6,7 @@ You've heard of the famous Snake game, right? Well, this npm/yarn package allows
 
 ```bash
 npm install snakecord
+# or
 yarn add snakecord
 ```
 
@@ -17,19 +18,19 @@ yarn add snakecord
 ## Example
 ```js
 const SnakeGame = require('snakecord');
-const Discord = require("discord.js");
-const client = new Discord.Client();
+const Discord = require('discord.js');
+const client = new Discord.Client(); // remember to add the intents that you need
 
 const snakeGame = new SnakeGame({
     title: 'Snake Game',
-    color: "GREEN",
+    color: 'GREEN',
     timestamp: false,
-    gameOverTitle: "Game Over"
+    gameOverTitle: 'Game Over'
 });
 
 const config = {
-    token: "TOKEN",
-    prefix: "t!"
+    token: 'TOKEN',
+    prefix: 't!'
 }
 
 client.on('ready', () => {
@@ -49,16 +50,16 @@ client.on('message', message => {
         return snakeGame.newGame(message);
     } else if(command === 'help' || command === 'h') {
         const embed = new Discord.MessageEmbed()
-            .setTitle("Help Menu")
+            .setTitle('Help Menu')
             .addFields(
-                { name: 'test', value: "Check the command handler", inline: true },
-                { name: 'snake', value: "Play the snake game", inline: true },
-                { name: 'help', value: "Show this list", inline: true }
+                { name: 'test', value: 'Check the command handler', inline: true },
+                { name: 'snake', value: 'Play the snake game', inline: true },
+                { name: 'help', value: 'Show this list', inline: true }
             )
             .setColor('RANDOM')
             .setTimestamp();
 
-        return message.channel.send(embed);
+        return message.channel.send({ embeds: [embed] });
     }
 });
 
