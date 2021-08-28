@@ -18,7 +18,7 @@ export class SnakeGame {
     score: number;
 
     // Other properties
-    gameEmbed: Message;
+    gameEmbedMessage: Message | null;
     options: SnakeGameOptions;
 
     constructor(options: SnakeGameOptions = {}) {
@@ -30,7 +30,7 @@ export class SnakeGame {
         this.snake = [{ x: 5, y: 5 }];
         this.snakeLength = 1;
         this.score = 0;
-        this.gameEmbed = null;
+        this.gameEmbedMessage = null;
         this.inGame = false;
 
         for (let y = 0; y < this.boardLength; y++) {
@@ -116,19 +116,19 @@ export class SnakeGame {
 
         const embed = new MessageEmbed()
             .setColor(this.options.color || 'RANDOM')
-            .setTitle(this.options.title || 'Snake Game')
+            .setTitle(this.options.title || 'Snake: The Game')
             .setDescription(this.gameBoardToString());
 
         if (this.options.timestamp) {
             embed.setTimestamp();
         }
 
-        msg.channel.send({ embeds: [embed] }).then(message => {
-            this.gameEmbed = message;
-            this.gameEmbed.react('⬅️');
-            this.gameEmbed.react('⬆️');
-            this.gameEmbed.react('⬇️');
-            this.gameEmbed.react('➡️');
+        msg.channel.send({ embeds: [embed] }).then(async (message) => {
+            this.gameEmbedMessage = message;
+            await this.gameEmbedMessage.react('⬅️');
+            await this.gameEmbedMessage.react('⬆️');
+            await this.gameEmbedMessage.react('⬇️');
+            await this.gameEmbedMessage.react('➡️');
 
             this.waitForReaction();
         });
@@ -146,14 +146,14 @@ export class SnakeGame {
 
         const editedEmbed = new MessageEmbed()
             .setColor(this.options.color || 'RANDOM')
-            .setTitle(this.options.title || 'Snake Game')
+            .setTitle(this.options.title || 'Snake: The Game')
             .setDescription(this.gameBoardToString());
 
         if (this.options.timestamp) {
             editedEmbed.setTimestamp();
         }
 
-        this.gameEmbed.edit({ embeds: [editedEmbed] });
+        this.gameEmbedMessage.edit({ embeds: [editedEmbed] });
         this.waitForReaction();
     }
 
@@ -165,31 +165,24 @@ export class SnakeGame {
 
         const editedEmbed = new MessageEmbed()
             .setColor(this.options.color || 'RANDOM')
-            .setTitle(this.options.gameOverTitle || 'Game Over')
+            .setTitle(this.options.gameOverTitle || 'Game Over!')
             .setDescription(`SCORE: **${this.score}**`);
 
         if (this.options.timestamp) {
             editedEmbed.setTimestamp();
         }
 
-        this.gameEmbed.edit({ embeds: [editedEmbed] });
-        this.gameEmbed.reactions.removeAll();
-    }
-
-    /**
-     * The message reaction collector filter.
-     * @param {MessageReaction} reaction - The reactions to check for.
-     * @param {User} user - The user who reacted.
-     */
-    filter(reaction: MessageReaction, user: User): boolean {
-        return ['⬅️', '⬆️', '⬇️', '➡️'].includes(reaction.emoji.name) && user.id !== this.gameEmbed.author.id;
+        this.gameEmbedMessage.edit({ embeds: [editedEmbed] });
+        this.gameEmbedMessage.reactions.removeAll();
     }
 
     /**
      * Handles reactions on the game embed.
      */
     waitForReaction(): void {
-        this.gameEmbed.awaitReactions({ filter: this.filter, max: 1, time: 60000, errors: ['time'] }).then(collected => {
+        this.gameEmbedMessage.awaitReactions({ filter: (reaction, user) => {
+            return ['⬅️', '⬆️', '⬇️', '➡️'].includes(reaction.emoji.name) && user.id !== this.gameEmbedMessage.author.id;
+        }, max: 1, time: 60000, errors: ['time'] }).then(collected => {
             const reaction = collected.first();
             const snakeHead = this.snake[0];
             const nextPos: EntityLocation = {
@@ -227,7 +220,7 @@ export class SnakeGame {
                 nextPos.x = nextX;
             }
 
-            reaction.users.remove(reaction.users.cache.filter(user => user.id !== this.gameEmbed.author.id).first().id).then(() => {
+            reaction.users.remove(reaction.users.cache.filter(user => user.id !== this.gameEmbedMessage.author.id).first().id).then(() => {
                 if (this.isLocationInSnake(nextPos)) {
                     this.gameOver();
                 } else {

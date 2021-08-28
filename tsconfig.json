@@ -13,7 +13,7 @@
             "esnext.symbol"
         ],
         "sourceMap": false,
-        "declaration": true,
+        // "declaration": true,
         "outDir": "./out"
     },
     "include": [

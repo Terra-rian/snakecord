@@ -4,8 +4,8 @@
     "homepage": "https://github.com/Terra-rian/snakecord",
     "version": "1.1.0-beta.6",
     "license": "ISC",
-    "main": "out/index.js",
-    "types": "out/snakecord.d.ts",
+    "main": "./out/index.js",
+    "types": "./typings/types.d.ts",
     "files": [
         "out",
         "src",
@@ -27,7 +27,7 @@
         "url": "https://github.com/Terra-rian/snakecord/issues"
     },
     "dependencies": {
-        "discord.js": "^13.0.0"
+        "discord.js": "^13.1.0"
     },
     "devDependencies": {
         "@types/node": "^16.4.7",
@@ -40,6 +40,6 @@
         "lint-and-fix": "eslint . --ext .ts --fix"
     },
     "engines": {
-        "node": ">=14"
+        "node": ">=16"
     }
 }
