@@ -84,7 +84,7 @@ class SnakeGame {
         this.newAppleLocation();
         const embed = new Discord.MessageEmbed()
             .setColor(this.options.color || 'RANDOM')
-            .setTitle(this.options.title || 'Snake Game')
+            .setTitle(this.options.title || 'Snake: The Game')
             .setDescription(this.gameBoardToString());
 
         if(this.options.timestamp) {
